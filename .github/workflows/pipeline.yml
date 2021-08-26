@@ -40,7 +40,6 @@ jobs:
           export PUBLISH_USER=${{ secrets.PUBLISH_USER }}
           export PUBLISH_TOKEN=${{ secrets.PUBLISH_TOKEN }}
           ./gradlew publish -PprojectVersion=${{ steps.set_version.outputs.safe_version }}
-
       -
         name: Print image version
         run: echo ${{ steps.set_version.outputs.safe_version }}
