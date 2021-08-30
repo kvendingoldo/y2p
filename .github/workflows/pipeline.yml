@@ -28,18 +28,18 @@ jobs:
       -
         name: Set application version
         id: set_version
-        uses: kvendingoldo/semver-action@v1.7
+        uses: kvendingoldo/semver-action@v1.8
         with:
           primary_branch: 'main'
       -
         name: Build with Gradle
-        run: ./gradlew build -PprojectVersion=${{ steps.set_version.outputs.safe_version }}
+        run: ./gradlew build -PprojectVersion=${{ steps.set_version.outputs.java_version }}
       -
         name: Publish with Gradle
         run: |
           export PUBLISH_USER=${{ secrets.PUBLISH_USER }}
           export PUBLISH_TOKEN=${{ secrets.PUBLISH_TOKEN }}
-          ./gradlew publish -PprojectVersion=${{ steps.set_version.outputs.safe_version }}
+          ./gradlew publish -PprojectVersion=${{ steps.set_version.outputs.java_version }}
       -
-        name: Print image version
-        run: echo ${{ steps.set_version.outputs.safe_version }}
+        name: Print Java lib version
+        run: echo ${{ steps.set_version.outputs.java_version }}
